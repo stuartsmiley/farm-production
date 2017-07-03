@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<cheatsheet title="CDI + EJB + JTA + Bean Validation + JAX-RS">
+  <intro>
+    <description>
+This quickstart shows off all the new features of Java EE 7, and makes a great starting point for your project.
+<br/><br/>
+<b>Bean Validation 1.1</b>
+<br/><br/>
+Bean Validation is an update specification for Java EE 7, inspired by Hibernate Validator. It allows application
+      developers to specify constraints once (often in their domain model), and have them applied in all layers of the
+      application, protecting data and giving useful feedback to users.
+<br/><br/>
+<b>JAX-RS: The Java API for RESTful Web Services</b>
+<br/><br/>
+JAX-RS is an update specification for Java EE 7. It allows application developers to easily expose Java
+      services as RESTful web services.
+</description>
+</intro>
+  <item
+        skip="false"
+        title="The production example in depth">
+     <description>
+       The production application shows off a number of Java EE technologies such as CDI, EJB, JTA, and JAX-RS.
+<br/><br/>
+As usual, let&apos;s start by looking at the necessary deployment descriptors. 
+By now, we're very used to seeing <b>beans.xml</b> in <b>WEB-INF/</b>
+(which can be found in the <b>src/main/webapp</b> directory of the example). 
+Notice that, once again, we don&apos;t need a web.xml. 
+There are two configuration files in <b>WEB-INF/classes/META-INF</b> 
+(which can be found in the <b>src/main/resources</b> directory of the example) — <b>persistence.xml</b>, 
+which sets up JPA, and <b>import.sql</b> which Hibernate, the JPA provider in WildFly, 
+will use to load the initial data into the application db when the application starts.
+    </description>
+    <command
+    required="true"
+    returns="currentProject"
+    serialization="org.jboss.tools.project.examples.cheatsheet.getProjectForCheatsheet"/>
+  </item>
+  
+  <item
+        skip="true"
+        title="Resources.java">
+     <description>
+       Now, let's take a look at the Resources class, which provides resources such as the entity manager. CDI
+       recommends using "resource producers", as we do in this example, to alias resources to CDI beans, allowing for
+       a consistent style throughout our application:
+    </description>
+    <subitem
+            label="We use the 'resource producer' pattern, from CDI, to 'alias' the old fashioned @PersistenceContext
+            injection of the entity manager to a CDI style injection. This allows us to use a consistent injection style
+            (@Inject) throughout the application. "
+            skip="true">
+    <command
+      required="false"
+      serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/com/finca_la_caprichosa/util/Resources.java,fromLine=43)"/>
+  </subitem>
+  <subitem
+            label="We expose a JDK logger for injection. In order to save a bit more boiler plate, we automatically set the logger category as the class name! "
+            skip="true">
+    <command
+      required="false"
+      serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/com/finca_la_caprichosa/util/Resources.java,fromLine=47)"/>
+  </subitem>
+    <subitem
+            label="If you want to define your own datasource, take a look at the Administration Guide for WildFly"
+            skip="true">
+    <command
+           required="false"
+           serialization="org.eclipse.ui.browser.openBrowser(url=https://docs.jboss.org/author/display/WFLY8/Admin+Guide#AdminGuide-DatasourceDefinitions/)"/>
+  </subitem>
+  </item>
+  
+
+  <item
+        skip="true"
+        title="JAX-RS">
+     <description>
+       Before we wrap up our tour of the production example application, 
+       let&apos;s take a look at how the JAX-RS endpoints are created. Firstly, {<b>JaxRSActivator</b>}}, 
+       which extends <b>Application</b> and is annotated with <b>@ApplicationPath</b>, 
+       is the Java EE 6 <b>no XML</b> approach to activating JAX-RS.
+    </description>
+    <subitem
+            label="JaxRsActivator.java"
+            skip="true">
+    <command
+      required="false"
+      serialization="org.jboss.tools.project.examples.cheatsheet.openFileInEditor(path=/${currentProject}/src/main/java/com/finca_la_caprichosa/rest/JaxRsActivator.java,fromLine=30, toLine=33)"/>
+  </subitem>
+  
+  </item>
+
+</cheatsheet>
