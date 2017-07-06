@@ -4,8 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Version;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -24,10 +28,14 @@ public class ProductionEvent implements Serializable {
     @Version
     private Short version;
 
+    @NotNull
     private Date created;
 
-    private Double quantity;
+    @Digits(integer = 4, fraction = 2)
+    @NotNull
+    private BigDecimal quantity;
 
+    @NotNull
     private Units units;
 
     private Integer producers;
@@ -62,11 +70,11 @@ public class ProductionEvent implements Serializable {
         this.created = created;
     }
 
-    public Double getQuantity() {
+    public BigDecimal getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Double quantity) {
+    public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
 

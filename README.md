@@ -78,8 +78,16 @@ http://localhost:8080/farm-production/rest/lists/units
 List of all available Storage options
 http://localhost:8080/farm-production/rest/lists/storage
 
+List of goats in production
+http://localhost:8080/farm-production/rest/lists/producers
+
 Posting a new ProductionEvent example
 curl -H "Content-Type: application/json" -X POST -d \
     '{"created":"2017-04-28T18:25:43.511Z","quantity":41,"units":{"id":1},"producers":9,"storage":{"id":1}}' \
     http://localhost:8080/farm-production/rest/production
+
+Posting a new Sample
+curl -H "Content-Type: application/json" -X POST -d \
+    '{"liters":1.6,"sampleDate":"2017-07-01T18:25:43.511Z","goat":{"id":11,"nombre":"Carmen","producing":true}}' \
+    http://localhost:8080/farm-production/rest/sample
     

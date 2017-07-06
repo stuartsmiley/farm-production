@@ -1,6 +1,7 @@
 package com.finca_la_caprichosa.rest;
 
 import com.finca_la_caprichosa.data.ListsRepository;
+import com.finca_la_caprichosa.model.Goat;
 import com.finca_la_caprichosa.model.Storage;
 import com.finca_la_caprichosa.model.Units;
 
@@ -34,5 +35,12 @@ public class ListsService {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Units> unitsOptions() {
         return repository.findUnits();
+    }
+
+    @GET
+    @Path("/producers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Goat> producerOptions() {
+        return repository.findProducers();
     }
 }

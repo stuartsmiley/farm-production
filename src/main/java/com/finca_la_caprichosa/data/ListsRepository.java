@@ -1,5 +1,6 @@
 package com.finca_la_caprichosa.data;
 
+import com.finca_la_caprichosa.model.Goat;
 import com.finca_la_caprichosa.model.Storage;
 import com.finca_la_caprichosa.model.Units;
 
@@ -28,6 +29,11 @@ public class ListsRepository {
 
     public List<Storage> findStorage() {
         Query query = em.createNamedQuery("Storage.active");
+        return query.getResultList();
+    }
+
+    public List<Goat> findProducers() {
+        Query query = em.createNamedQuery("Goat.inProduction");
         return query.getResultList();
     }
 }

@@ -1,8 +1,7 @@
 package com.finca_la_caprichosa.rest;
 
-import com.finca_la_caprichosa.data.ProductionEventRepository;
-import com.finca_la_caprichosa.model.ProductionEvent;
-import com.finca_la_caprichosa.service.ProductionService;
+import com.finca_la_caprichosa.model.Sample;
+import com.finca_la_caprichosa.service.SampleService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -10,7 +9,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -18,60 +16,49 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by ssmiley on 6/28/17.
+ * Created by ssmiley on 7/4/17.
  */
-@Path("/production")
+@Path("/sample")
 @RequestScoped
-public class ProductionEventRestService {
+public class Sampler {
 
     @Inject
-    private ProductionEventRepository repository;
+    private SampleService service;
 
     @Inject
     private Validator validator;
 
-    @Inject
-    private ProductionService service;
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<ProductionEvent> listAll() {
-        return repository.findAll();
-    }
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createProductionEvent(ProductionEvent productionEvent) {
+    public Response createSample(Sample sample) {
         Response.ResponseBuilder builder = null;
 
         try {
-            validateProductionEvent(productionEvent);
-            ProductionEvent persistent = service.addProductionEvent(productionEvent);
+            validateSample(sample);
+            Sample persistent = service.addSample(sample);
             builder = Response.ok();
             builder.entity(persistent);
         } catch (ConstraintViolationException e) {
-            builder = createViolationResponse(e.getConstraintViolations());
+            builder =  builder = createViolationResponse(e.getConstraintViolations());
         } catch (Exception e) {
             Map<String, String> responseObj = new HashMap<>();
             responseObj.put("error", e.getMessage());
             builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
         }
-
         return builder.build();
     }
 
-    private void validateProductionEvent(ProductionEvent productionEvent) {
-        Set<ConstraintViolation<ProductionEvent>> violations = validator.validate(productionEvent);
+    private void validateSample(Sample sample) {
+        Set<ConstraintViolation<Sample>> violations = validator.validate(sample);
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(new HashSet<ConstraintViolation<?>>(violations));
         }
-        // TODO if a similar event exists in a similar timeframe
+        // TODO if a similar sample exists in a similar timeframe
         // throw a new ValidationException
     }
 
@@ -83,7 +70,6 @@ public class ProductionEventRestService {
      * @return JAX-RS response containing all violations
      */
     private Response.ResponseBuilder createViolationResponse(Set<ConstraintViolation<?>> violations) {
-//        log.fine("Validation completed. violations found: " + violations.size());
 
         Map<String, String> responseObj = new HashMap<>();
 
