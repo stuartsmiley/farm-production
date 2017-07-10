@@ -90,4 +90,21 @@ Posting a new Sample
 curl -H "Content-Type: application/json" -X POST -d \
     '{"liters":1.6,"sampleDate":"2017-07-01T18:25:43.511Z","goat":{"id":11,"nombre":"Carmen","producing":true}}' \
     http://localhost:8080/farm-production/rest/sample
-    
+
+
+https://abhirockzz.wordpress.com/2016/03/18/json-web-token-in-action-with-jax-rs/
+
+Now go to
+http://localhost:8080/farm-production/auth/token
+And enter basic auth stuart/eatmorepossum
+Grab the jwt out of the response header:
+jwt:eyJhbGciOiJQUzI1NiJ9.eyJzdWIiOiJzdHVhcnQifQ.HwYdWOTpeC4qKhit-6iXAPxKMaD4YWEenkJNw_yx0JgpA-wQLUGNl0xV4B7VuW_-wBgKBqoFV7TWQCtG5IUO6Auvhte9lVNlQ9FhgDQOGmyiX00Nxo4MQW6PytH0N7Z99n1yXGhrBtypW4nb_PtW0RZtXqwRIsMvhm24jRWGSrYHru4Th_vEaxqG6U_ZQJcWgKC8QoT3cvmLn0w8Er4MrFVoavWkf4X1OAN6Xm5OYHE1QwxcAZ00T_oSaqmT0TxqaLO_hWTRt9Tr7lPciqk4UjWdHDWxlaj4DC7LA_GmTrG3vkZNgQzqSoPaSjDldFVI31QYlk5GcMuM1DfWf4aUbA
+And use it:
+curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJQUzI1NiJ9.eyJzdWIiOiJzdHVhcnQifQ.HwYdWOTpeC4qKhit-6iXAPxKMaD4YWEenkJNw_yx0JgpA-wQLUGNl0xV4B7VuW_-wBgKBqoFV7TWQCtG5IUO6Auvhte9lVNlQ9FhgDQOGmyiX00Nxo4MQW6PytH0N7Z99n1yXGhrBtypW4nb_PtW0RZtXqwRIsMvhm24jRWGSrYHru4Th_vEaxqG6U_ZQJcWgKC8QoT3cvmLn0w8Er4MrFVoavWkf4X1OAN6Xm5OYHE1QwxcAZ00T_oSaqmT0TxqaLO_hWTRt9Tr7lPciqk4UjWdHDWxlaj4DC7LA_GmTrG3vkZNgQzqSoPaSjDldFVI31QYlk5GcMuM1DfWf4aUbA" \
+-X POST -d \
+'{"liters":1.6,"sampleDate":"2017-07-01T18:25:43.511Z","goat":{"id":11,"nombre":"Carmen","producing":true}}' \
+    http://localhost:8080/farm-production/rest/sample
+
+# When unauthenticated
+$ curl -I http://localhost:8080/farm-production/rest/lists/producers
+# returns    HTTP/1.1 401 Unauthorized
