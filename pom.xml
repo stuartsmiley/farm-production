@@ -121,6 +121,18 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bitbucket.b_c</groupId>
+            <artifactId>jose4j</artifactId>
+            <version>0.5.8</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- Now we declare any tools needed -->
 
         <!-- Annotation processor that raising compilation errors whenever constraint 
