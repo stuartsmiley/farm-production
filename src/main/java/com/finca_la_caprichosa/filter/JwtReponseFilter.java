@@ -19,10 +19,13 @@ public class JwtReponseFilter implements ContainerResponseFilter {
                        ContainerResponseContext containerResponseContext) throws IOException {
         Boolean failed = (Boolean) containerRequestContext.getProperty("auth-failed");
         if (failed == null || !failed)  {
-            String[] auth = SPLITTER.split(containerRequestContext.getHeaderString("Authorization"));
-            List<Object> jwt = new ArrayList<>();
-            jwt.add(auth[1]);
-            containerResponseContext.getHeaders().put("jwt", jwt);
+            String headerString = containerRequestContext.getHeaderString("Authorization");
+            if (headerString != null) {
+                String[] auth = SPLITTER.split(headerString);
+                List<Object> jwt = new ArrayList<>();
+                jwt.add(auth[1]);
+                containerResponseContext.getHeaders().put("jwt", jwt);
+            }
         }
 
     }
