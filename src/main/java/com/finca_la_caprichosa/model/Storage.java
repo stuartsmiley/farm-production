@@ -16,7 +16,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 })
 public class Storage implements Serializable {
     @Id
-    @GeneratedValue(strategy = SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String location;

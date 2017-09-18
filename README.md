@@ -113,3 +113,68 @@ curl -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJQU
 # When unauthenticated
 $ curl -I http://localhost:8080/farm-production/rest/lists/producers
 # returns    HTTP/1.1 401 Unauthorized
+
+
+Create the database
+create database caprichosa;
+CREATE USER 'fincacaprichosa'@'localhost' IDENTIFIED BY 'milkinggoatstakestime';
+GRANT ALL PRIVILEGES ON caprichosa.* TO 'fincacaprichosa'@'localhost';
+
+
+create the myql module
+cd $JBOSS_HOME/modules/system/layers/base/com
+mkdir -p mysql/driver/main
+put mysql jar in $JBOSS_HOME/modules/system/layers/base/com/mysql/driver/main
+vi $JBOSS_HOME/modules/system/layers/base/com/mysql/driver/main/module.xml
+<module xmlns="urn:jboss:module:1.3" name="com.mysql.driver">
+ <resources>
+   <resource-root path="mysql-connector-java-5.1.44-bin.jar" />
+   </resources>
+   <dependencies>
+     <module name="javax.api"/>
+     <module name="javax.transaction.api"/>
+   </dependencies>
+</module>
+
+from standalone.xml
+<subsystem xmlns="urn:jboss:domain:datasources:4.0">
+            <datasources>
+                <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
+                    <driver>h2</driver>
+                    <security>
+                        <user-name>sa</user-name>
+                        <password>sa</password>
+                    </security>
+                </datasource>
+                <datasource jndi-name="java:jboss/datasources/caprichosaDS" pool-name="goatPool" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:mysql://localhost:3306/caprichosa</connection-url>
+                    <driver>mysql</driver>
+                    <pool>
+                        <min-pool-size>1</min-pool-size>
+                        <max-pool-size>20</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <security>
+                        <user-name>fincacaprichosa</user-name>
+                        <password>milkinggoatstakestime</password>
+                    </security>
+                </datasource>
+                <drivers>
+                    <driver name="h2" module="com.h2database.h2">
+                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+                    </driver>
+                    <driver name="mysql" module="com.mysql.driver">
+                            <driver-class>com.mysql.jdbc.Driver</driver-class>
+                    </driver>
+                </drivers>
+</datasources>
+
+drop table DATABASECHANGELOG;
+drop table DATABASECHANGELOGLOCK;
+drop table production_event;
+drop table sample;
+drop table production_event;
+drop table units;
+drop table storage;
+drop table goat;

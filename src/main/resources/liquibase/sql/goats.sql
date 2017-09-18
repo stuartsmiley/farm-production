@@ -1,0 +1,13 @@
+insert into goat (id, nombre, producing) values (10002, 'Puka', true);
+insert into goat (id, nombre, producing) values (10003, 'Lupita', true);
+insert into goat (id, nombre, producing) values (10004, 'Lolita', true);
+insert into goat (id, nombre, producing) values (10005, 'Canela', true);
+insert into goat (id, nombre, producing) values (10010, 'Carmen', false);
+insert into goat (id, nombre, producing) values (10011, 'Estrella', true);
+insert into goat (id, nombre, producing) values (10012, 'Dulce', true);
+insert into goat (id, nombre, producing) values (10013, 'Fula', false);
+insert into goat (id, nombre, producing) values (10021, 'Eva', true);
+insert into goat (id, nombre, producing) values (10022, 'Luna', true);
+insert into goat (id, nombre, producing) values (10023, 'Sofi', true);
+insert into goat (id, nombre, producing) values (10024, 'Corsi', true);
+insert into goat (id, nombre, producing) values (10025, 'Bella', true);
