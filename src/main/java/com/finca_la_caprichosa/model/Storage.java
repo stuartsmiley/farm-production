@@ -10,6 +10,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
  * Storage location.
  */
 @Entity
+@Table(name = "storage")
 @NamedQueries( {
         @NamedQuery(name = "Storage.active",
         query = "from Storage where active = true order by location")

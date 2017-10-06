@@ -35,7 +35,8 @@ Build and Deploy the app
 3. Type this command to build and deploy the archive:
 
         mvn clean package wildfly:deploy
-
+        mvn wildfly:deploy -Dmilker.name=TheDude -Dskip.liquibase=true -Dmilker.password=abides
+        
 4. This will deploy `target/farm-production.war` to the running instance of the server.
  
 
@@ -94,7 +95,7 @@ curl -H "Content-Type: application/json" -X POST -d \
 
 
 curl -H "Content-Type: application/json" -X POST -d \
-    '{"email":"stuart","password":"eatmorepossum"}' \
+    '{"email":"TheDude","password":"abides"}' \
     -i http://localhost:8080/farm-production/token/login
 
 https://abhirockzz.wordpress.com/2016/03/18/json-web-token-in-action-with-jax-rs/
@@ -119,6 +120,8 @@ Create the database
 create database caprichosa;
 CREATE USER 'fincacaprichosa'@'localhost' IDENTIFIED BY 'milkinggoatstakestime';
 GRANT ALL PRIVILEGES ON caprichosa.* TO 'fincacaprichosa'@'localhost';
+CREATE USER 'fincacaprichosa'@'%' IDENTIFIED BY 'milkinggoatstakestime';
+GRANT ALL PRIVILEGES ON caprichosa.* TO 'fincacaprichosa'@'%';
 
 
 create the myql module

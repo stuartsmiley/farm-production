@@ -9,6 +9,7 @@ import java.io.Serializable;
  * production we want to track.
  */
 @Entity
+@Table(name = "units")
 @NamedQueries({
         @NamedQuery(name = "Units.active",
         query = "from Units where active = true order by name")

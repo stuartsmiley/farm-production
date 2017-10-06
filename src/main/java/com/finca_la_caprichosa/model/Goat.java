@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.io.Serializable;
  * Record of a goat.
  */
 @Entity
+@Table(name = "goat")
 @XmlRootElement
 @NamedQueries({
         @NamedQuery(name = "Goat.inProduction",
