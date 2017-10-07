@@ -2,9 +2,12 @@ package com.finca_la_caprichosa.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -13,6 +16,7 @@ import java.io.Serializable;
  * Record of a goat.
  */
 @Entity
+@Table(name = "goat")
 @XmlRootElement
 @NamedQueries({
         @NamedQuery(name = "Goat.inProduction",
@@ -21,7 +25,7 @@ import java.io.Serializable;
 public class Goat implements Serializable {
 
     @Id
-    private Integer id;
+    private Long id;
 
     @NotNull
     @Column(updatable = false)
@@ -30,11 +34,11 @@ public class Goat implements Serializable {
     @NotNull
     private boolean producing;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

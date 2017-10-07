@@ -10,13 +10,14 @@ import static javax.persistence.GenerationType.SEQUENCE;
  * Storage location.
  */
 @Entity
+@Table(name = "storage")
 @NamedQueries( {
         @NamedQuery(name = "Storage.active",
         query = "from Storage where active = true order by location")
 })
 public class Storage implements Serializable {
     @Id
-    @GeneratedValue(strategy = SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String location;

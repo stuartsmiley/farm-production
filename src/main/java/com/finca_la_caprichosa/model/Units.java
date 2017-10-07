@@ -9,6 +9,7 @@ import java.io.Serializable;
  * production we want to track.
  */
 @Entity
+@Table(name = "units")
 @NamedQueries({
         @NamedQuery(name = "Units.active",
         query = "from Units where active = true order by name")
@@ -17,7 +18,7 @@ import java.io.Serializable;
 public class Units implements Serializable {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

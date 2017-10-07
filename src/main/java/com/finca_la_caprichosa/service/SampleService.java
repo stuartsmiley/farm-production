@@ -15,8 +15,14 @@ public class SampleService {
     @Inject
     private EntityManager em;
 
-    public Sample addSample(Sample sample) {
-        em.persist(sample);
-        return sample;
+    public Sample saveSample(Sample sample) {
+        Sample saved = null;
+        if (sample.getId() == null) {
+            em.persist(sample);
+            saved = sample;
+        } else {
+            saved = em.merge(sample);
+        }
+        return saved;
     }
 }

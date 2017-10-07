@@ -40,7 +40,7 @@ public class Sampler {
 
         try {
             validateSample(sample);
-            Sample persistent = service.addSample(sample);
+            Sample persistent = service.saveSample(sample);
             builder = Response.ok();
             builder.entity(persistent);
         } catch (ConstraintViolationException e) {

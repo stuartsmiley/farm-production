@@ -10,11 +10,13 @@
          data source, this example data source is just for development and testing! -->
       <!-- The datasource is deployed as WEB-farmproduction-ds.xml.xml, you
          can find it in the source at src/main/webapp/WEB-farmproduction-ds.xml.xml -->
-      <jta-data-source>java:jboss/datasources/farmproductionDS</jta-data-source>
+      <!--<jta-data-source>java:jboss/datasources/farmproductionDS</jta-data-source>-->
       <properties>
-         <!-- Properties for Hibernate -->
-         <property name="hibernate.hbm2ddl.auto" value="create-drop" />
-         <property name="hibernate.show_sql" value="false" />
+         <!--property name="hibernate.hbm2ddl.auto" value="create-drop" />
+         <property name="hibernate.show_sql" value="false" /-->
+         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
       </properties>
+      <jta-data-source>java:jboss/datasources/caprichosaDS</jta-data-source>
+
    </persistence-unit>
 </persistence>

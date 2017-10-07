@@ -37,6 +37,12 @@
         <!-- maven-compiler-plugin -->
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
+        <skip.liquibase>false</skip.liquibase>
+
+        <!-- environment specific -->
+        <jdbc.connection>jdbc:mysql://localhost:3306/caprichosa</jdbc.connection>
+        <jdbc.username>fincacaprichosa</jdbc.username>
+        <jdbc.password>milkinggoatstakestime</jdbc.password>
     </properties>
 
 
@@ -150,6 +156,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.42</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -161,6 +174,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>${version.war.plugin}</version>
                 <configuration>
+                    <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
                     <!-- Java EE 7 doesn't require web.xml, Maven needs to catch up! -->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -171,6 +185,27 @@
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>${version.wildfly.maven.plugin}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.5.3</version>
+                <configuration>
+                    <changeLogFile>src/main/resources/liquibase/changelog.xml</changeLogFile>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>${jdbc.connection}</url>
+                    <username>${jdbc.username}</username>
+                    <password>${jdbc.password}</password>
+                    <skip>${skip.liquibase}</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
