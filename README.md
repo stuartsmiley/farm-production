@@ -46,6 +46,7 @@ The application this project produces is designed to be run on JBoss WildFly.
         <milker.name>TheDude</milker.name>
         <milker.password>abides</milker.password>
       </properties>
+    </profile>
   </profiles>
 </settings>```
 
