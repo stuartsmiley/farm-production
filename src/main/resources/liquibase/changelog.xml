@@ -8,4 +8,9 @@
         <sqlFile path="src/main/resources/liquibase/sql/initialSchema.sql" />
         <sqlFile path="src/main/resources/liquibase/sql/goats.sql" />
     </changeSet>
+    <changeSet id="FP-7" author="ssmiley">
+        <loadData file="src/main/resources/liquibase/csv/samples.csv"
+                  tableName="sample" separator=",">
+        </loadData>
+    </changeSet>
 </databaseChangeLog>
