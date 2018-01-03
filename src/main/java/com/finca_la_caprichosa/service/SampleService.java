@@ -5,6 +5,8 @@ import com.finca_la_caprichosa.model.Sample;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * For adding samples.
@@ -24,5 +26,14 @@ public class SampleService {
             saved = em.merge(sample);
         }
         return saved;
+    }
+
+    public List<com.finca_la_caprichosa.dto.Sample> samplesForGoatAndMonths(Long goatId, Integer months) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1 * months);
+        return em.createNamedQuery("Sample.byGoatAndMonths")
+                .setParameter("months", cal.getTime())
+                .setParameter("goat", goatId)
+                .getResultList();
     }
 }

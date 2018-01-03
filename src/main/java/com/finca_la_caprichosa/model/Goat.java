@@ -20,7 +20,9 @@ import java.io.Serializable;
 @XmlRootElement
 @NamedQueries({
         @NamedQuery(name = "Goat.inProduction",
-        query = "from Goat where producing is true")
+        query = "from Goat where producing is true"),
+        @NamedQuery(name = "Goat.produced",
+        query = "select distinct g from Goat g, Sample s where g.id = s.goat.id")
 })
 public class Goat implements Serializable {
 

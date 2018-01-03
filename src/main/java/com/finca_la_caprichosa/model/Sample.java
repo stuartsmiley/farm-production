@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -19,6 +21,11 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "sample")
+@NamedQueries({
+        @NamedQuery(name = "Sample.byGoatAndMonths",
+        query = "select new com.finca_la_caprichosa.dto.Sample(s.liters, s.sampleDate) from Sample s "
+                + "where s.goat.id = :goat and s.sampleDate > :months order by s.sampleDate asc")
+})
 public class Sample {
 
     @Id
