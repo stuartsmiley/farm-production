@@ -8,4 +8,7 @@
         <sqlFile path="src/main/resources/liquibase/sql/initialSchema.sql" />
         <sqlFile path="src/main/resources/liquibase/sql/goats.sql" />
     </changeSet>
+    <changeSet id="rain" author="ssmiley">
+        <sqlFile path="src/main/resources/liquibase/sql/rain.sql"/>
+    </changeSet>
 </databaseChangeLog>

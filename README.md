@@ -79,6 +79,10 @@ following commands to pull them into your local repository. The IDE should then 
 ## Accessing the Rest Endpoints
 -----------------------------
 
+Insert a rain record
+curl -H "Content-Type: application/json" -H "Authorization: Bearer ey..."  \
+ -X POST -d  '{"millimeters":26,"recordedOn":1525020664157}' -i http://localhost:8080/farm-production/rest/rain
+
 List of all ProductionEvent entries
 `http://localhost:8080/farm-production/rest/production`
 
@@ -193,6 +197,7 @@ drop table production_event;
 drop table units;
 drop table storage;
 drop table goat;
+drop table rain;
 
 To skip running the liquibase migration in your build run
 `mvn -Pfp wildfly:deploy -Dskip.liquibase=true`

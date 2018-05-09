@@ -1,11 +1,10 @@
 package com.finca_la_caprichosa.rest;
 
-import com.finca_la_caprichosa.model.Sample;
-import com.finca_la_caprichosa.service.SampleService;
+import com.finca_la_caprichosa.model.Rain;
+import com.finca_la_caprichosa.service.RainService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 import javax.ws.rs.Consumes;
@@ -15,19 +14,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
- * Created by ssmiley on 7/4/17.
+ * Created by ssmiley on 4/25/18.
  */
-@Path("/sample")
+@Path("/rain")
 @RequestScoped
-public class Sampler extends AbstractRestController<Sample> {
+public class Rainy extends AbstractRestController<Rain> {
 
     @Inject
-    private SampleService service;
+    private RainService service;
 
     @Inject
     private Validator validator;
@@ -35,12 +32,11 @@ public class Sampler extends AbstractRestController<Sample> {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createSample(Sample sample) {
+    public Response createRain(Rain rain) {
         Response.ResponseBuilder builder = null;
 
         try {
-            validateEntity(sample);
-            Sample persistent = service.saveSample(sample);
+            Rain persistent = service.saveRain(rain);
             builder = Response.ok();
             builder.entity(persistent);
         } catch (ConstraintViolationException e) {
@@ -52,8 +48,4 @@ public class Sampler extends AbstractRestController<Sample> {
         }
         return builder.build();
     }
-
-
-
-
 }

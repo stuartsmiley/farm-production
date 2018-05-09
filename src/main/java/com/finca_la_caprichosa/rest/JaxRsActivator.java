@@ -42,6 +42,7 @@ public class JaxRsActivator extends Application {
         classSet.add(ListsService.class);
         classSet.add(ProductionEventRestService.class);
         classSet.add(Sampler.class);
+        classSet.add(Rainy.class);
         classSet.add(JwtReponseFilter.class);
         return classSet;
     }
