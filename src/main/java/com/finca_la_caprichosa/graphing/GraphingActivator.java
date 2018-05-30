@@ -14,6 +14,7 @@ public class GraphingActivator extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> classSet = new HashSet<>();
         classSet.add(Samples.class);
+        classSet.add(RainfallTotals.class);
         return classSet;
     }
 

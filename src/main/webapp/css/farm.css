@@ -58,3 +58,23 @@ stroke-width: 2px;
 }
 .am { stroke: #e9a3c9 }
 .pm { stroke: #a1d76a }
+
+#navcontainer {
+margin-left: 30px;
+margin-bottom: 1em;
+overflow: hidden;
+width: 460px;
+}
+#navlist {
+list-style-type: none;
+margin: 0;
+padding: 0;
+}
+#navlist li {
+border-left: 1px solid #000;
+float: left;
+line-height: 1.1em;
+margin: 0 .5em 0 -.5em;
+padding: 0 .5em 0 .5em;
+}
+

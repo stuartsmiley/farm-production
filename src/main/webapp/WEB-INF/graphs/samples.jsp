@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>samples</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.png"/>
 <link media="all" rel="stylesheet" type="text/css" href="<c:url value='/css/farm.css'/>"/>
 <script src="<c:url value='/scripts/d3.js'/>"></script>
 </head>

@@ -20,10 +20,18 @@
         <servlet-name>GraphServlet</servlet-name>
         <servlet-class>com.finca_la_caprichosa.servlet.GraphServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RainServlet</servlet-name>
+        <servlet-class>com.finca_la_caprichosa.servlet.RainServlet</servlet-class>
+    </servlet>
     
     <servlet-mapping>
         <servlet-name>GraphServlet</servlet-name>
         <url-pattern>/graphs/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RainServlet</servlet-name>
+        <url-pattern>/lluvia/*</url-pattern>
     </servlet-mapping>
     
     <security-constraint>

@@ -11,10 +11,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
- * Created by ssmiley on 12/24/17.
+ * Fetch some samples.
  */
 @RequestScoped
 @Path("/samples")
