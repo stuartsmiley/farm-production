@@ -30,7 +30,7 @@ The application this project produces is designed to be run on JBoss WildFly.
 ## Build and Deploy the app
 -------------------------
 
-1. Make sure you have started the wildfly as described above.
+1. Make sure you have started wildfly as described above.
 2. Open a command line and navigate to the root directory of this app.
 3. Type this command to build and deploy the archive:
 
