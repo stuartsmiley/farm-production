@@ -10,7 +10,7 @@
     <name>Farm Production</name>
     <description>Tracking production at Finca La Caprichosa</description>
 
-    <url>https://finca-la-caprichosa.com</url>
+    <url>https://finca-la-caprichosa.com/farm-production</url>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -24,20 +24,16 @@
         
         <!-- Define the version of the JBoss BOMs we want to import to specify 
             tested stacks. -->
-        <version.jboss.bom>10.1.0.Final</version.jboss.bom>
+        <version.jboss.bom>18.0.0.Final</version.jboss.bom>
 
         <!-- other plugin versions -->
-        <version.compiler.plugin>3.1</version.compiler.plugin>
-        <version.surefire.plugin>2.16</version.surefire.plugin>
-        <version.war.plugin>3.1.0</version.war.plugin>
-
-        <!-- maven-compiler-plugin -->
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
+        <version.compiler.plugin>3.8.1</version.compiler.plugin>
+        <version.surefire.plugin>3.0.0-M3</version.surefire.plugin>
+        <version.war.plugin>3.2.3</version.war.plugin>
         <skip.liquibase>false</skip.liquibase>
 
         <!-- environment specific -->
-        <jdbc.connection>jdbc:mysql://localhost:3306/caprichosa</jdbc.connection>
+        <jdbc.connection>jdbc:mysql://localhost:3306/caprichosa?serverTimezone=UTC</jdbc.connection>
         <jdbc.username>fincacaprichosa</jdbc.username>
         <jdbc.password>milkinggoatstakestime</jdbc.password>
     </properties>
@@ -45,17 +41,9 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- JBoss distributes a complete set of Java EE 7 APIs including a Bill
-                of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection) 
-                of artifacts. We use this here so that we always get the correct versions 
-                of artifacts. Here we use the jboss-javaee-7.0-with-tools stack (you can
-                read this as the JBoss stack of the Java EE 7 APIs, with some extras tools
-                for your project, such as Arquillian for testing) and the jboss-javaee-7.0-with-hibernate
-                stack you can read this as the JBoss stack of the Java EE 7 APIs, with extras
-                from the Hibernate family of projects) -->
             <dependency>
                 <groupId>org.wildfly.bom</groupId>
-                <artifactId>wildfly-javaee7</artifactId>
+                <artifactId>wildfly-jakartaee8</artifactId>
                 <version>${version.jboss.bom}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -65,98 +53,77 @@
 
     <dependencies>
 
-        <!-- First declare the APIs we depend on and need for compilation. All 
-            of them are provided by JBoss WildFly -->
-
-        <!-- Import the CDI API, we use provided scope as the API is included in 
-            JBoss WildFly -->
         <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>2.2.3</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Import the Common Annotations API (JSR-250), we use provided scope 
-            as the API is included in JBoss WildFly -->
         <dependency>
-            <groupId>org.jboss.spec.javax.annotation</groupId>
-            <artifactId>jboss-annotations-api_1.2_spec</artifactId>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+            <version>1.0</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Import the JAX-RS API, we use provided scope as the API is included 
-            in JBoss WildFly -->
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>jaxrs-api</artifactId>
-            <version>3.0.12.Final</version>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>2.0.2</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Import the JPA API, we use provided scope as the API is included in 
-            JBoss WildFly -->
         <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <groupId>org.jboss.spec.javax.servlet</groupId>
+            <artifactId>jboss-servlet-api_4.0_spec</artifactId>
+            <version>2.0.0.Final</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Import the EJB API, we use provided scope as the API is included in 
-            JBoss WildFly -->
+        <dependency>
+            <groupId>org.jboss.spec.javax.ws.rs</groupId>
+            <artifactId>jboss-jaxrs-api_2.1_spec</artifactId>
+            <version>2.0.0.Final</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.jboss.spec.javax.ejb</groupId>
             <artifactId>jboss-ejb-api_3.2_spec</artifactId>
+            <version>2.0.0.Final</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- JSR-303 (Bean Validation) Implementation -->
-        <!-- Provides portable constraints such as @Email -->
-        <!-- Hibernate Validator is shipped in JBoss WildFly -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+            <version>2.0.2</version>
             <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
-
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <groupId>org.jboss.spec.javax.xml.bind</groupId>
+            <artifactId>jboss-jaxb-api_2.3_spec</artifactId>
+            <version>2.0.0.Final</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.spec.javax.annotation</groupId>
+            <artifactId>jboss-annotations-api_1.3_spec</artifactId>
+            <version>2.0.1.Final</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.bitbucket.b_c</groupId>
             <artifactId>jose4j</artifactId>
-            <version>0.5.8</version>
+            <version>0.6.5</version>
             <scope>compile</scope>
         </dependency>
-        <!-- Now we declare any tools needed -->
-
-        <!-- Annotation processor that raising compilation errors whenever constraint 
-            annotations are incorrectly used. -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator-annotation-processor</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.2.0</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.42</version>
+            <version>8.0.18</version>
             <scope>provided</scope>
         </dependency>
 
@@ -167,6 +134,14 @@
             given to the generated war, and hence the context root) -->
         <finalName>${project.artifactId}</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.compiler.plugin}</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>${version.war.plugin}</version>
@@ -181,7 +156,7 @@
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
-                <version>1.2.1.Final</version>
+                <version>2.0.1.Final</version>
             </plugin>
             <plugin>
                 <groupId>org.liquibase</groupId>
@@ -189,7 +164,6 @@
                 <version>3.5.3</version>
                 <configuration>
                     <changeLogFile>src/main/resources/liquibase/changelog.xml</changeLogFile>
-                    <driver>com.mysql.jdbc.Driver</driver>
                     <url>${jdbc.connection}</url>
                     <username>${jdbc.username}</username>
                     <password>${jdbc.password}</password>
@@ -219,11 +193,11 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>${version.surefire.plugin}</version>
                         <configuration>
+                            <argLine>--illegal-access=permit</argLine>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-
     </profiles>
 </project>
