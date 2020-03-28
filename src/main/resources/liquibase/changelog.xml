@@ -11,4 +11,7 @@
     <changeSet id="rain" author="ssmiley">
         <sqlFile path="src/main/resources/liquibase/sql/rain.sql"/>
     </changeSet>
+    <changeSet id="history" author="ssmiley">
+        <sqlFile path="src/main/resources/liquibase/sql/herd_history.sql"/>
+    </changeSet>
 </databaseChangeLog>

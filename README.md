@@ -181,6 +181,7 @@ drop table units;
 drop table storage;
 drop table goat;
 drop table rain;
+drop table herd_history;
 ```
 
 To skip running the liquibase migration in your build run

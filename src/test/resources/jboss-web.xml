@@ -1,0 +1,3 @@
+<jboss-web>
+    <security-domain>ApplicationRealm</security-domain>
+</jboss-web>

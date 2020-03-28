@@ -52,11 +52,11 @@ public class Goat implements Serializable {
         this.nombre = nombre;
     }
 
-    public boolean isProducing() {
-        return producing;
-    }
-
-    public void setProducing(boolean producing) {
-        this.producing = producing;
-    }
+//    public boolean isProducing() {
+//        return producing;
+//    }
+//
+//    public void setProducing(boolean producing) {
+//        this.producing = producing;
+//    }
 }
