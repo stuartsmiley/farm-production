@@ -2,9 +2,9 @@ package com.finca_la_caprichosa.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -19,10 +19,12 @@ import java.io.Serializable;
 @Table(name = "goat")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Goat.inProduction",
-        query = "from Goat where producing is true"),
         @NamedQuery(name = "Goat.produced",
         query = "select distinct g from Goat g, Sample s where g.id = s.goat.id")
+})
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "Goat.inProduction",
+           query = "select id, nombre from from goat g join current_herd c on g.id = c.goat_id where c.event = 'IN'")
 })
 public class Goat implements Serializable {
 
@@ -32,9 +34,6 @@ public class Goat implements Serializable {
     @NotNull
     @Column(updatable = false)
     private String nombre;
-
-    @NotNull
-    private boolean producing;
 
     public Long getId() {
         return id;
@@ -51,12 +50,4 @@ public class Goat implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-//    public boolean isProducing() {
-//        return producing;
-//    }
-//
-//    public void setProducing(boolean producing) {
-//        this.producing = producing;
-//    }
 }

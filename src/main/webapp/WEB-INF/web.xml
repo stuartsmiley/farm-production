@@ -33,24 +33,11 @@
         <servlet-name>RainServlet</servlet-name>
         <url-pattern>/lluvia/*</url-pattern>
     </servlet-mapping>
-    
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>REST-DEMO-GET-POST</web-resource-name>
-            <url-pattern>/auth/*</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-            <http-method>PUT</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>farmer</role-name>
-        </auth-constraint>
-    </security-constraint>
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Graphs</web-resource-name>
             <url-pattern>/graphs/*</url-pattern>
-            <http-method>GET</http-method>
+            <http-method-omission>GET</http-method-omission>
         </web-resource-collection>
         <auth-constraint>
             <role-name>farmer</role-name>

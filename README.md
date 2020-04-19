@@ -172,6 +172,7 @@ and replace it with
 
 TODO: add a build goal to blow away the database. It can be done manually with:
 ```markdown
+drop view current_herd
 drop table DATABASECHANGELOG;
 drop table DATABASECHANGELOGLOCK;
 drop table production_event;
@@ -179,9 +180,9 @@ drop table sample;
 drop table production_event;
 drop table units;
 drop table storage;
+drop table herd_history;
 drop table goat;
 drop table rain;
-drop table herd_history;
 ```
 
 To skip running the liquibase migration in your build run

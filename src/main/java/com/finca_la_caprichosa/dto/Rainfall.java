@@ -2,6 +2,7 @@ package com.finca_la_caprichosa.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.json.bind.annotation.JsonbTypeAdapter;
 
 /**
  * For transfering rainfall data to d3 in the browser.
@@ -22,6 +23,7 @@ public class Rainfall {
         this.year = year;
     }
 
+    @JsonbTypeAdapter(DateAdapter.class)
     public Date getDate() {
         return date;
     }

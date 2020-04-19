@@ -11,7 +11,7 @@ alter table herd_history add constraint goat_herd_history_fk foreign key (goat_i
 insert into herd_history(change_date, event, goat_id)  select now(), 'IN', id from goat where producing = 1;
 insert into herd_history(change_date, event, goat_id)  select now(), 'OUT', id from goat where producing = 0;
 
-alter table goat drop column producing;
+
 
 create view current_herd as
 select h.id, h.change_date, h.event, h.goat_id
